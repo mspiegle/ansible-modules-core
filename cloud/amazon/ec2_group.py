@@ -295,6 +295,12 @@ def main():
                     rule['from_port'] = None
                     rule['to_port'] = None
 
+                if str(rule['proto']) not in ('icmp'):
+                    if rule.get('from_port') in (None, '-1', -1):
+                        rule['from_port'] = None
+                    if rule.get('to_port') in (None, '-1', -1):
+                        rule['to_port'] = None
+
                 # If rule already exists, don't later delete it
                 ruleId = make_rule_key('in', rule, group_id, ip)
                 if ruleId in groupRules:
@@ -334,6 +340,12 @@ def main():
                     rule['proto'] = -1
                     rule['from_port'] = None
                     rule['to_port'] = None
+
+                if str(rule['proto']) not in ('icmp'):
+                    if rule.get('from_port') in (None, '-1', -1):
+                        rule['from_port'] = None
+                    if rule.get('to_port') in (None, '-1', -1):
+                        rule['to_port'] = None
 
                 # If rule already exists, don't later delete it
                 ruleId = make_rule_key('out', rule, group_id, ip)
